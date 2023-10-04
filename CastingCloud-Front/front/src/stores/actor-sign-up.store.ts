@@ -38,8 +38,8 @@ const useActorStore = create<IActorSignUpStore>((set) => ({
     setActorEmail: (actorEmail) => {
         const actorEmailValidate = /^[A-Za-z0-9]*@[A-Za-z0-9]([-.]?[A-Za-z0-9])*\.[A-Za-z0-9]{2,3}$/;
         const isMatched = actorEmailValidate.test(actorEmail);
-        const emailMessage = isMatched ? '' : '이메일 형태가 아닙니다.';
-        set((state) => ({...state, actorEmail, emailMessage}))
+        const actorEmailErrorMessage = isMatched ? '' : '이메일 형식이 아닙니다.';
+        set((state) => ({...state, actorEmail, actorEmailErrorMessage}))
     },
     setActorPassword: (actorPassword) => set((state) => ({...state, actorPassword})),
     setActorPasswordCheck: (actorPasswordCheck) => set((state) => ({...state, actorPasswordCheck})),
