@@ -1,6 +1,5 @@
-package com.example.castingCloud.dto.request.auth;
+package com.example.castingCloud.dto.request.actor;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,19 +8,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ActorSignUpDto {
-    @NotBlank
-    @Email
-    @Length(max = 40)
-    private String actorEmail;
-
-    @NotBlank
-    @Length(min = 8, max = 20)
-    private String actorPassword;
-
+@Data
+public class ActorValidateNickNameDto {
     @NotBlank
     @Length(min = 3, max = 10)
     private String actorNickName;

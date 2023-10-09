@@ -10,19 +10,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class ActorSignUpDto {
+@NoArgsConstructor
+public class AdminSignInDto {
     @NotBlank
     @Email
     @Length(max = 40)
-    private String actorEmail;
+    private String adminEmail;
 
     @NotBlank
     @Length(min = 8, max = 20)
-    private String actorPassword;
-
-    @NotBlank
-    @Length(min = 3, max = 10)
-    private String actorNickName;
+    private String adminPassword;
 }
