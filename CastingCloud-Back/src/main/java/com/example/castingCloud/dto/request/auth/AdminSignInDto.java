@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class AdminSignInDto {
     @NotBlank
     @Email
-    @Length(max = 40)
+    @Length(max = 254)
     private String adminEmail;
 
     @NotBlank

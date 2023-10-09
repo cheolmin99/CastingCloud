@@ -1,4 +1,4 @@
-package com.example.castingCloud.dto.request.actor;
+package com.example.castingCloud.dto.request.user;
 
 import javax.validation.constraints.NotBlank;
 
@@ -11,8 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class ActorValidateNickNameDto {
+public class ValidateNickNameDto {
     @NotBlank
-    @Length(min = 3, max = 10)
+    @Length(min = 3, max = 20)
     private String actorNickName;
+
+    @NotBlank
+    @Length(min = 3, max = 20)
+    private String directorName;
 }

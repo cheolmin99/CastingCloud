@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ActorSignUpDto {
     @NotBlank
     @Email
-    @Length(max = 40)
+    @Length(max = 254)
     private String actorEmail;
 
     @NotBlank
@@ -23,6 +23,6 @@ public class ActorSignUpDto {
     private String actorPassword;
 
     @NotBlank
-    @Length(min = 3, max = 10)
+    @Length(min = 3, max = 20)
     private String actorNickName;
 }

@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class DirectorSignInDto {
     @NotBlank
     @Email
-    @Length(max = 40)
+    @Length(max = 254)
     private String directorEmail;
 
     @NotBlank

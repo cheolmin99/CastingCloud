@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class DirectorSignUpDto {
     @NotBlank
     @Email
-    @Length(max = 45)
+    @Length(max = 254)
     private String directorEmail;
     
     @NotBlank
@@ -27,10 +27,10 @@ public class DirectorSignUpDto {
     private int directorPhoneNumber;
     
     @NotBlank
-    @Length(min = 3, max = 10)
+    @Length(min = 3, max = 20)
     private String directorName;
     
     @NotBlank
-    @Length(min = 2, max = 30)
+    @Length(min = 3, max = 100)
     private String directorCompany;
 }
