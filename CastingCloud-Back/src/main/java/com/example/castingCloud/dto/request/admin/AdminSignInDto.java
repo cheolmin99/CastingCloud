@@ -1,4 +1,4 @@
-package com.example.castingCloud.dto.request.auth;
+package com.example.castingCloud.dto.request.admin;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -9,9 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 public class AdminSignInDto {
     @NotBlank
     @Email
