@@ -23,6 +23,6 @@ public class AdminSignUpDto {
     private String adminPassword;
 
     @NotBlank
-    @Length(min = 4, max = 20)
+    @Length(min = 2, max = 20)
     private String adminName;
 }

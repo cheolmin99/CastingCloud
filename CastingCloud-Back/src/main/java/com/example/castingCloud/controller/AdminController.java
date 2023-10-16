@@ -2,6 +2,7 @@ package com.example.castingCloud.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,9 +19,10 @@ import com.example.castingCloud.service.AdminAuthService;
 @RestController
 @RequestMapping(ApiPattern.ADMIN)
 public class AdminController {
+    @Autowired
     private AdminAuthService adminAuthService;
 
-    private final String ADMIN_SIGN_UP = "/sgin-up";
+    private final String ADMIN_SIGN_UP = "/sign-up";
     private final String ADMIN_SIGN_IN = "/sign-in";
 
     @PostMapping(ADMIN_SIGN_UP)
@@ -31,7 +33,7 @@ public class AdminController {
 
     @PostMapping(ADMIN_SIGN_IN)
     public ResponseDto<AdminSignInResponseDto> signIn(@Valid @RequestBody AdminSignInDto requestBody) {
-        ResponseDto<AdminSignInResponseDto> response = adminAuthService.adminSginIn(requestBody);
+        ResponseDto<AdminSignInResponseDto> response = adminAuthService.adminSignIn(requestBody);
         return response;
     }
 }

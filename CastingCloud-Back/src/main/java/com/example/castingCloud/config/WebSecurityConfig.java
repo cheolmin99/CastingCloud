@@ -30,7 +30,7 @@ public class WebSecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/*"/* 인증이 된 url */).authenticated()
-                .antMatchers("/auth/**")
+                .antMatchers("/auth/**", "/admin/**")
                 .permitAll()
                 .antMatchers(HttpMethod.GET, "/**" /* get 메서드 허용 url */).permitAll()
                 .anyRequest().authenticated().and()

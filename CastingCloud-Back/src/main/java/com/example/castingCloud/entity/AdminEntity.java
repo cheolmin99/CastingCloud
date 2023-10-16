@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.castingCloud.dto.request.admin.AdminSignUpDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,4 +21,10 @@ public class AdminEntity {
     private String adminName;
     private String adminEmail;
     private String adminPassword;
+
+    public AdminEntity(AdminSignUpDto dto) {
+        this.adminEmail = dto.getAdminEmail();
+        this.adminName = dto.getAdminName();
+        this.adminPassword = dto.getAdminPassword();
+    }
 }

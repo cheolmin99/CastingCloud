@@ -18,6 +18,7 @@ import com.example.castingCloud.service.AdminAuthService;
 
 @Service
 public class AdminAuthServiceImplements implements AdminAuthService {
+    
     @Autowired
     private TokenProvider tokenProvider;
 
@@ -34,14 +35,19 @@ public class AdminAuthServiceImplements implements AdminAuthService {
         String adminName = dto.getAdminName();
 
         try {
-            boolean hasAdminEmail = adminRepository.exexistsByAdminEmail(adminEmail);
+            boolean hasAdminEmail = adminRepository.existsByAdminEmail(adminEmail);
             if(hasAdminEmail) return ResponseDto.setFailed(ResponseMessage.EXIST_EMAIL);
 
+            boolean hasAdminName = adminRepository.existsByAdminName(adminName);
+            if(hasAdminName) return ResponseDto.setFailed(ResponseMessage.EXIST_NAME);
+            
             String encodePassword = passwordEncoder.encode(adminPassword);
             dto.setAdminPassword(encodePassword);
 
-            boolean hasAdminName = adminRepository.exexistsByAdminName(adminName);
-            if(hasAdminName) return ResponseDto.setFailed(ResponseMessage.EXIST_NAME);
+            AdminEntity adminEntity = new AdminEntity(dto);
+            adminRepository.save(adminEntity);
+
+            data = new AdminSignUpResponseDto(true);
 
         } catch (Exception exception) {
             exception.printStackTrace();
