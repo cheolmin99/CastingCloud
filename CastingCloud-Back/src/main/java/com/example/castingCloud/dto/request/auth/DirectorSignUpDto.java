@@ -23,14 +23,14 @@ public class DirectorSignUpDto {
     private String directorPassword;
     
     @NotBlank
-    @Length(min = 10, max = 11)
-    private int directorPhoneNumber;
+    @Length(min = 10, max = 14)
+    private String directorPhoneNumber;
     
     @NotBlank
     @Length(min = 3, max = 20)
     private String directorName;
     
     @NotBlank
-    @Length(min = 3, max = 100)
+    @Length(min = 3, max = 45)
     private String directorCompany;
 }

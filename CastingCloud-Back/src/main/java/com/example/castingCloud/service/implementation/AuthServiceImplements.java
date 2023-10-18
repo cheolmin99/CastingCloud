@@ -89,7 +89,7 @@ public class AuthServiceImplements implements AuthService {
         String directorEmail = dto.getDirectorEmail();
         String directorPassword = dto.getDirectorPassword();
         String directorName = dto.getDirectorName();
-        int directorPhoneNumber = dto.getDirectorPhoneNumber();
+        String directorPhoneNumber = dto.getDirectorPhoneNumber();
         String directorCompany = dto.getDirectorCompany();
         
         try {

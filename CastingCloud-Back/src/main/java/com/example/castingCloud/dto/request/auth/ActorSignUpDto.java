@@ -22,7 +22,5 @@ public class ActorSignUpDto {
     @Length(min = 8, max = 20)
     private String actorPassword;
 
-    @NotBlank
-    @Length(min = 3, max = 20)
     private String actorNickName;
 }

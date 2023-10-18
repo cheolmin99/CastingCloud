@@ -2,6 +2,7 @@ package com.example.castingCloud.controller;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,7 @@ import com.example.castingCloud.service.AuthService;
 @RestController
 @RequestMapping(ApiPattern.AUTH)
 public class AuthController {
+    @Autowired
     private AuthService authService;
 
     private final String ACTOR_SIGN_UP = "/actor-sign-up";

@@ -13,7 +13,7 @@ public class DirectorSignInResponseDto {
     private String directorEmail;
     private String directorPhoneNumber;
     private String directorName;
-    private String directorCpmpany;
+    private String directorCompany;
     private String directorProfile;
 
     private String token;
@@ -24,7 +24,7 @@ public class DirectorSignInResponseDto {
         this.directorEmail = directorEntity.getDirectorEmail();
         this.directorPhoneNumber = directorEntity.getDirectorPhoneNumber();
         this.directorName = directorEntity.getDirectorName();
-        this.directorCpmpany = directorEntity.getDirectorCompany();
+        this.directorCompany = directorEntity.getDirectorCompany();
         this.directorProfile = directorEntity.getDirectorProfile();
         this.token = token;
         this.expriedTime = 3 * 24 * 60 * 60 * 1000;

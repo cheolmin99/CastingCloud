@@ -13,7 +13,7 @@ public interface DirectorRepository extends JpaRepository<DirectorEntity, String
 
     public boolean existsByDirectorName(String diretorName);
 
-    public boolean existsByDirectorPhoneNumber(int directorPhoneNumber);
+    public boolean existsByDirectorPhoneNumber(String directorPhoneNumber);
 
     public boolean existsByDirectorCompany(String directorCompany);
 }
