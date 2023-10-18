@@ -30,7 +30,6 @@ public class AuthServiceImplements implements AuthService {
     @Autowired
     private ActorRepository actorRepository;
 
-
     private static final String DEFAULT_NICKNAME = "user";
 
     private static final String E = null;
@@ -80,46 +79,6 @@ public class AuthServiceImplements implements AuthService {
         return newActorNickName;
     }
 
-    @Autowired
-    private DirectorRepository directorRepository; 
-
-    public ResponseDto<DirectorSignUpResponseDto> directorSignUp(DirectorSignUpDto dto) {
-        DirectorSignUpResponseDto data = null;
-
-        String directorEmail = dto.getDirectorEmail();
-        String directorPassword = dto.getDirectorPassword();
-        String directorName = dto.getDirectorName();
-        String directorPhoneNumber = dto.getDirectorPhoneNumber();
-        String directorCompany = dto.getDirectorCompany();
-        
-        try {
-            boolean hasDirectorEmail = directorRepository.existsByDirectorEmail(directorEmail);
-            if(hasDirectorEmail) return ResponseDto.setFailed(ResponseMessage.EXIST_EMAIL);
-
-            String encodePassword  = passwordEncoder.encode(directorPassword);
-            dto.setDirectorPassword(encodePassword);
-
-            boolean hasDirectorName = directorRepository.existsByDirectorName(directorName);
-            if(hasDirectorName) return ResponseDto.setFailed(ResponseMessage.EXIST_NAME);
-
-            boolean hasDirectorPhoneNumber = directorRepository.existsByDirectorPhoneNumber(directorPhoneNumber);
-            if(hasDirectorPhoneNumber)  return ResponseDto.setFailed(ResponseMessage.EXIST_PHONE_NUMBER);
-
-            boolean hasDirectorCompany = directorRepository.existsByDirectorCompany(directorCompany);
-            if(hasDirectorCompany) return ResponseDto.setFailed(ResponseMessage.EXIST_COMPANY);
-
-            DirectorEntity directorEntity = new DirectorEntity(dto);
-            directorRepository.save(directorEntity);
-
-            data = new DirectorSignUpResponseDto(true);
-
-        } catch (Exception exception) {
-            exception.printStackTrace();
-            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
-        }
-        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
-    }
-
     public ResponseDto<ActorSignInResponseDto> actorSignIn(ActorSignInDto dto) {
         ActorSignInResponseDto data = null;
 
@@ -144,6 +103,46 @@ public class AuthServiceImplements implements AuthService {
         try {
             String token = tokenProvider.create(actorEmail);
             data = new ActorSignInResponseDto(actorEntity, token);
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+    }
+
+    @Autowired
+    private DirectorRepository directorRepository; 
+
+    public ResponseDto<DirectorSignUpResponseDto> directorSignUp(DirectorSignUpDto dto) {
+        DirectorSignUpResponseDto data = null;
+
+        String directorEmail = dto.getDirectorEmail();
+        String directorPassword = dto.getDirectorPassword();
+        String directorName = dto.getDirectorName();
+        String directorPhoneNumber = dto.getDirectorPhoneNumber();
+        String directorCompany = dto.getDirectorCompany();
+        
+        try {
+            boolean hasDirectorEmail = directorRepository.existsByDirectorEmail(directorEmail);
+            if(hasDirectorEmail) return ResponseDto.setFailed(ResponseMessage.EXIST_EMAIL);
+            
+            boolean hasDirectorName = directorRepository.existsByDirectorName(directorName);
+            if(hasDirectorName) return ResponseDto.setFailed(ResponseMessage.EXIST_NAME);
+            
+            boolean hasDirectorPhoneNumber = directorRepository.existsByDirectorPhoneNumber(directorPhoneNumber);
+            if(hasDirectorPhoneNumber)  return ResponseDto.setFailed(ResponseMessage.EXIST_PHONE_NUMBER);
+            
+            boolean hasDirectorCompany = directorRepository.existsByDirectorCompany(directorCompany);
+            if(hasDirectorCompany) return ResponseDto.setFailed(ResponseMessage.EXIST_COMPANY);
+
+            String encodePassword  = passwordEncoder.encode(directorPassword);
+            dto.setDirectorPassword(encodePassword);
+            
+            DirectorEntity directorEntity = new DirectorEntity(dto);
+            directorRepository.save(directorEntity);
+
+            data = new DirectorSignUpResponseDto(true);
+
         } catch (Exception exception) {
             exception.printStackTrace();
             return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);

@@ -32,7 +32,7 @@ public class AdminController {
     }
 
     @PostMapping(ADMIN_SIGN_IN)
-    public ResponseDto<AdminSignInResponseDto> signIn(@Valid @RequestBody AdminSignInDto requestBody) {
+    public ResponseDto<AdminSignInResponseDto> signIn(@RequestBody AdminSignInDto requestBody) {
         ResponseDto<AdminSignInResponseDto> response = adminAuthService.adminSignIn(requestBody);
         return response;
     }

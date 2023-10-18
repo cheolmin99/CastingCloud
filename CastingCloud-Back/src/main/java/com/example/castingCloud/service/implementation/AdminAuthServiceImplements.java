@@ -18,7 +18,6 @@ import com.example.castingCloud.service.AdminAuthService;
 
 @Service
 public class AdminAuthServiceImplements implements AdminAuthService {
-    
     @Autowired
     private TokenProvider tokenProvider;
 

@@ -26,10 +26,10 @@ public class DirectorEntity {
     private String directorProfile;
 
     public DirectorEntity(DirectorSignUpDto dto) {
-        this.directorEmail = getDirectorEmail();
-        this.directorPassword = getDirectorPassword();
-        this.directorPhoneNumber = getDirectorPhoneNumber();
-        this.directorName = getDirectorName();
-        this.directorCompany = getDirectorCompany();
+        this.directorEmail = dto.getDirectorEmail();
+        this.directorPassword = dto.getDirectorPassword();
+        this.directorName = dto.getDirectorName();
+        this.directorPhoneNumber = dto.getDirectorPhoneNumber();
+        this.directorCompany = dto.getDirectorCompany();
     }
 }

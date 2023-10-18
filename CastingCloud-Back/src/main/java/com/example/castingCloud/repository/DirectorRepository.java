@@ -11,7 +11,7 @@ public interface DirectorRepository extends JpaRepository<DirectorEntity, String
 
     public boolean existsByDirectorEmail(String directorEmail);
 
-    public boolean existsByDirectorName(String diretorName);
+    public boolean existsByDirectorName(String directorName);
 
     public boolean existsByDirectorPhoneNumber(String directorPhoneNumber);
 

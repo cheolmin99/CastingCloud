@@ -27,31 +27,31 @@ public class AuthController {
     private AuthService authService;
 
     private final String ACTOR_SIGN_UP = "/actor-sign-up";
-    private final String DIRECTOR_SIGN_UP = "/director-sign-up";
-
     private final String ACTOR_SIGN_IN = "/actor-sign-in";
-    private final String DIRECTOR_SIGN_IN = "/director-sign-in";
     
     @PostMapping(ACTOR_SIGN_UP)
-    public ResponseDto<ActorSignUpResponseDto> signUp(@Valid @RequestBody ActorSignUpDto requestBody) {
+    public ResponseDto<ActorSignUpResponseDto> actorSignUp(@Valid @RequestBody ActorSignUpDto requestBody) {
         ResponseDto<ActorSignUpResponseDto> response = authService.actorSignUp(requestBody);
         return response;
     }
 
-    @PostMapping(DIRECTOR_SIGN_UP)
-    public ResponseDto<DirectorSignUpResponseDto> signUp(@Valid @RequestBody DirectorSignUpDto requestBody) {
-        ResponseDto<DirectorSignUpResponseDto> response = authService.directorSignUp(requestBody);
-        return response;
-    }
-
     @PostMapping(ACTOR_SIGN_IN)
-    public ResponseDto<ActorSignInResponseDto> signIn(@RequestBody ActorSignInDto requestBody) {
+    public ResponseDto<ActorSignInResponseDto> actorSignIn(@RequestBody ActorSignInDto requestBody) {
         ResponseDto<ActorSignInResponseDto> response = authService.actorSignIn(requestBody);
         return response;
     }
 
-    @PostMapping(DIRECTOR_SIGN_IN)
-    public ResponseDto<DirectorSignInResponseDto> signIn(@RequestBody DirectorSignInDto requestBody) {
+    private final String DIRECTOR_SIGN_UP = "/director-sign-up";
+    private final String DIRECTOR_SIGN_IN = "/director-sign-in";
+
+    @PostMapping(DIRECTOR_SIGN_UP)
+    public ResponseDto<DirectorSignUpResponseDto> directorSignUp(@Valid @RequestBody DirectorSignUpDto requestBody) {
+        ResponseDto<DirectorSignUpResponseDto> response = authService.directorSignUp(requestBody);
+        return response;
+    }
+
+     @PostMapping(DIRECTOR_SIGN_IN)
+    public ResponseDto<DirectorSignInResponseDto> directorSignIn(@RequestBody DirectorSignInDto requestBody) {
         ResponseDto<DirectorSignInResponseDto> response = authService.directorSignIn(requestBody);
         return response;
     }

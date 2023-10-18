@@ -13,9 +13,9 @@ import com.example.castingCloud.dto.response.auth.DirectorSignUpResponseDto;
 public interface AuthService {
     public ResponseDto<ActorSignUpResponseDto> actorSignUp(ActorSignUpDto dto);
     
-    public ResponseDto<DirectorSignUpResponseDto> directorSignUp(DirectorSignUpDto dto);
-
     public ResponseDto<ActorSignInResponseDto> actorSignIn(ActorSignInDto dto);
+
+    public ResponseDto<DirectorSignUpResponseDto> directorSignUp(DirectorSignUpDto dto);
 
     public ResponseDto<DirectorSignInResponseDto> directorSignIn(DirectorSignInDto dto);
 }
