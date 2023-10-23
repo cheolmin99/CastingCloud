@@ -26,13 +26,13 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
     const [showActorPassword, setShowActorpassword] = useState<boolean>(false);
     const [actorLoginError, setActorLoginError] = useState<boolean>(false);
 
-    const onActorEmailKeyPressHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+    const onActorEmailKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
         if (!ActorPasswordRef.current) return;
         (ActorPasswordRef as any).current?.lastChild?.firstChild?.focus();
     }
 
-    const onActorPasswordKeyPressHandler = (event: KeyboardEvent<HTMLDivElement>) => {
+    const onActorPasswordKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if(!event.key || !actorPassword) return;
         onActorLoginHandler();
     }
@@ -69,16 +69,38 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
 
     return(
         <>
-            <div className="container">
-                <div className="actor-login-box">
-                    로그인
-                    <input type="text" className="actor-input-login" />
-                </div>
-                <div className="actor-password-box">
-                    비밀번호
-                    <input type="email" className="actor-input-password" />
-                </div>
-            </div>
+            <div className="login-box">
+                        <div className="login">
+                        <input className="email"
+                                onChange={(event) => setActorEmail(event.target.value)}
+                                onKeyPress={(event) => onActorEmailKeyPressHandler(event)}/>
+                            <div className="option" typeof="option">
+                                @
+                                    <select className="option-box" name="order">
+                                        <option value="naver">naver.com</option>
+                                        <option value="google">google.com</option>
+                                        <option value="kakao">kakao.com</option>
+                                        <option value="daum">daum.net</option>
+                                    </select>
+                            </div>
+                        </div>
+                        <div className="password-box">
+                            <input className="password" type={showActorPassword ? 'text' : 'password'}
+                            onChange={(event) => setActorPassword(event.target.value)}
+                            onKeyPress={(event) => onActorPasswordKeyPressHandler(event)} />
+                        </div>
+                        <div className="button-box">
+                            <button className="login-button" type="button">로그인</button>
+                        </div>
+                        <div className="auth-navi">
+                            <div className="actor-sign-in">
+                                회원가입
+                            </div>
+                            <div className="director-auth">
+                                디랙터 로그인
+                            </div>
+                        </div>
+                    </div>
         </>
     )
 }

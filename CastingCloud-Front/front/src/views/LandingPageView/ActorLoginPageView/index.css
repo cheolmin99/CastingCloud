@@ -1,11 +1,64 @@
-.actor-login-box {
-    
+.login-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: 1px rgb(0, 0, 0);
 }
 
-.actor-input-login {
+.login {
+    display: flex;
+}
+
+.email {
+    width: 150px;
+    margin-right: 3px;
+    border: 2px rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.option {
+    display: flex;
+    width: 154px;
+}
+
+select {
+    width: 100%;
+    margin-left: 3px;
+    border: 2px rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.order {
+    width: 100%;
+}
+
+.password {
+    width: 307px;
+    height: 17px;
+    margin-top: 15px;
+    border: 2px rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.login-button {
+    width: 311px;
+    height: 17px;
+    margin-top: 15px;
+    border: 2px rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.auth-navi {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    width: 311px;
+}
+
+.actor-sign-in {
 
 }
 
-.actor-input-password {
-    
+.director-auth {
+
 }
