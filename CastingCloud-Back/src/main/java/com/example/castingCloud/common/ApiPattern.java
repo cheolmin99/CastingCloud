@@ -4,5 +4,7 @@ public class ApiPattern {
     public static final String AUTH = "/auth";
 
     public static final String ADMIN = "/admin";
+
+    public static final String USER = "/user";
     
 }

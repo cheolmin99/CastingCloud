@@ -1,6 +1,7 @@
 import { SetStateAction, useState } from "react"
 import './index.css';
 import ActorLoginView from "./ActorLoginPageView";
+import ActorSignUpView from "./ActorSignUpPageView";
 
 export default function LandingPageView() {
 
@@ -13,9 +14,7 @@ export default function LandingPageView() {
                     여긴 랜딩페이지에 관한 뭐가 들어가겠지
                 </div>
                 <div className="right-box">
-                    <ActorLoginView setActorLoginView={function (value: SetStateAction<boolean>): void {
-                        throw new Error("Function not implemented.");
-                    } } />
+                    {loginView ? (<ActorLoginView setActorLoginView={setLoginView}/>) : (<ActorSignUpView setActorSignUpView={setLoginView} />) }
                 </div>
             </div>
         </>

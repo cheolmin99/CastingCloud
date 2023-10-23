@@ -42,7 +42,7 @@ select {
 
 .login-button {
     width: 311px;
-    height: 17px;
+    height: 19px;
     margin-top: 15px;
     border: 2px rgb(0, 0, 0);
     border-radius: 3px;
@@ -53,13 +53,14 @@ select {
     display: flex;
     justify-content: space-between;
     margin-top: 12px;
+    height: 19px;
     width: 311px;
 }
 
 .actor-sign-in {
-
+    cursor: pointer;
 }
 
 .director-auth {
-
+    cursor: pointer;
 }
