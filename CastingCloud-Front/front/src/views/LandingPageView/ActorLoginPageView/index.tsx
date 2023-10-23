@@ -94,7 +94,7 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
                             <button className="login-button" type="button" onClick={onActorLoginHandler}>로그인</button>
                         </div>
                         <div className="auth-navi">
-                            <div className="actor-sign-in">
+                            <div className="actor-sign-in" onClick={() => setActorLoginView(false)}>
                                 회원가입
                             </div>
                             <div className="director-auth">
