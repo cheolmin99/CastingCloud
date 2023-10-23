@@ -66,7 +66,7 @@ public class AdminAuthServiceImplements implements AdminAuthService {
         
         try {
             adminEntity = adminRepository.findByAdminEmail(adminEmail);
-            if(adminEmail == null)
+            if(adminEntity == null)
             return ResponseDto.setFailed(ResponseMessage.FAIL_SIGN_IN);
 
             boolean isEqualPassword = passwordEncoder.matches(adminPassword, adminEntity.getAdminPassword());

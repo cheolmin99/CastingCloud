@@ -89,7 +89,7 @@ public class AuthServiceImplements implements AuthService {
 
         try {
             actorEntity = actorRepository.findByActorEmail(actorEmail);
-            if (actorEmail == null)
+            if (actorEntity == null)
             return ResponseDto.setFailed(ResponseMessage.FAIL_SIGN_IN);
 
             boolean isEqualPassword = passwordEncoder.matches(actorPassword, actorEntity.getActorPassword());
@@ -160,7 +160,7 @@ public class AuthServiceImplements implements AuthService {
 
         try {
             directorEntity = directorRepository.findByDirectorEmail(directorEmail);
-            if (directorEmail == null)
+            if (directorEntity == null)
             return ResponseDto.setFailed(ResponseMessage.FAIL_SIGN_IN);
 
             boolean isEqualPassword = passwordEncoder.matches(directorPassword, directorEntity.getDirectorPassword());

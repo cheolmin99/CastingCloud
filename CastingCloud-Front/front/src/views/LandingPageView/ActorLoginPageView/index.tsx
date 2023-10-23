@@ -8,6 +8,7 @@ import { ACTOR_SIGN_IN_URL } from 'src/constants/api';
 import useIActorStore from 'src/stores/user.store';
 import { getExpires } from 'src/utils';
 import { useCookies } from 'react-cookie';
+import './index.css';
 
 interface Props {
     setActorLoginView: Dispatch<SetStateAction<boolean>>;
@@ -71,7 +72,7 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
         <>
             <div className="login-box">
                         <div className="login">
-                        <input className="email"
+                        <input className="email" 
                                 onChange={(event) => setActorEmail(event.target.value)}
                                 onKeyPress={(event) => onActorEmailKeyPressHandler(event)}/>
                             <div className="option" typeof="option">
@@ -90,7 +91,7 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
                             onKeyPress={(event) => onActorPasswordKeyPressHandler(event)} />
                         </div>
                         <div className="button-box">
-                            <button className="login-button" type="button">로그인</button>
+                            <button className="login-button" type="button" onClick={onActorLoginHandler}>로그인</button>
                         </div>
                         <div className="auth-navi">
                             <div className="actor-sign-in">
