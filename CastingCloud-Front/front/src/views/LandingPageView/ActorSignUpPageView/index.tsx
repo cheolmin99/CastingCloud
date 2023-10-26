@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react'
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import './index.css'
 import { useActorStore, useDirectorStore } from 'src/stores'
 
@@ -8,9 +8,29 @@ interface Props {
 
 export default function ActorSignUpView({ setActorSignUpView }: Props) {
     const { actorEmail, actorPassword, actorPasswordCheck} = useActorStore();
-    const { setActorEmail, setActorPassword, setActorPasswordCheck } = useActorStore();
-    const { actorEmailValidate, actorNickNameValidate } = useActorStore();
-    const { directorEmailValidate, directorNameValidate } =useDirectorStore();
+    const { setActorEmail, setActorPassword, setActorEmailPatternCheck, setActorPasswordCheck } = useActorStore();
+    const { actorEmailValidate, actorNickNameValidate, actorPasswordValidate, actorPasswordPatternCheck } = useActorStore();
+    const { setActorEmailValidate, setActorNickNameValidate, setActorPasswordValidate, setActorPasswordPatternCheck } = useActorStore();
+    const { directorEmailValidate, directorNameValidate } = useDirectorStore();
+
+    const [showPasswordCheck, setShowPasswordCheck] = useState<boolean>(false);
+
+    const emailValidator = /^[A-Za-z0-9]*@[A-Za-z0-9]([-.]?[A-Za-z0-9])*\.[A-Za-z0-9]{2,3}$/;
+    const passwordValidator = /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!?_]).{8,20}$/;
+
+    const onActorEmailChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const value = event.target.value;
+        const isMatched = emailValidator.test(value);
+        setActorEmailPatternCheck(isMatched);
+        setActorEmail(value);
+    }
+
+    const onActorPasswordCheckChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const value = event.target.value;
+        const isMatched = actorPassword === value;
+        setActorPasswordValidate(isMatched);
+        setActorPassword(value);
+    }
 
     return (
         <>
