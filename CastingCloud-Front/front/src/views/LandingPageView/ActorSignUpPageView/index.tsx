@@ -1,13 +1,16 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react'
 import './index.css'
 import { useActorStore, useDirectorStore } from 'src/stores'
+import { AxiosResponse } from 'axios';
+import ResponseDto from 'src/apis/response';
+import { ValidateEmailResponseDto } from 'src/apis/response/user';
 
 interface Props {
     setActorSignUpView: Dispatch<SetStateAction<boolean>>
 }
 
 export default function ActorSignUpView({ setActorSignUpView }: Props) {
-    const { actorEmail, actorPassword, actorPasswordCheck} = useActorStore();
+    const { actorEmail, actorPassword, actorEmailPatternCheck, actorPasswordCheck} = useActorStore();
     const { setActorEmail, setActorPassword, setActorEmailPatternCheck, setActorPasswordCheck } = useActorStore();
     const { actorEmailValidate, actorNickNameValidate, actorPasswordValidate, actorPasswordPatternCheck } = useActorStore();
     const { setActorEmailValidate, setActorNickNameValidate, setActorPasswordValidate, setActorPasswordPatternCheck } = useActorStore();
@@ -32,6 +35,15 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
         setActorPassword(value);
     }
 
+    const onEmailValidateChenkChangeHandler = (response: AxiosResponse<any, any>) => {
+        const { result, message, data } = response.data  as ResponseDto<ValidateEmailResponseDto>;
+        if (!result || !data) {
+            alert(message);
+            return;
+        }
+        setActorEmailValidate(data.result);
+    }
+
     return (
         <>
             <div className='actorSignUpContainor'>
@@ -52,7 +64,11 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
                                 </select>
                         </div>
                     </div>
-                        <button type='button' className='email-check-button'>이메일 중복 확인</button>
+                        { actorEmailPatternCheck === null? (<div></div>) :
+                        !actorEmailPatternCheck ? (<div style={{color: 'red'}}>이메일 형식이 맞지 않습니다.</div>) : 
+                        actorEmailValidate === null ? (<div style={{color: 'orange'}}>이메일 중복 체크를 해주세요.</div>) :
+                        !actorEmailValidate ? (<div style={{color: 'red'}}>사용할 수 없는 이메일 입니다.</div>) : (<div style={{color: 'green'}}>사용 가능한 이메일 입니다.</div>)}
+                        <button type='button' className='email-check-button' onClick={() => onEmailValidateChenkChangeHandler} >이메일 중복 확인</button>
                     비밀번호
                     <div className='password-box'>
                         <input type='password' className='password' />
