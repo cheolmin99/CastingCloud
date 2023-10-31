@@ -8,7 +8,7 @@ interface IDirectorSginUpStore {
     directorName: string;
     directorCompany: string;
     directorProfile: string;
-    setDirecotrEmail: (str: string) => void;
+    setDirectorEmail: (str: string) => void;
     setDirectorPassword: (str: string) => void;
     setDirectorPasswordCheck: (str: string) => void;
     setDirectorPhoneNumber: (str: string) => void;
@@ -39,7 +39,7 @@ const useDirectorStore = create<IDirectorSginUpStore>((set) => ({
     directorName: '',
     directorCompany: '',
     directorProfile: '',
-    setDirecotrEmail: (directorEmail) => {
+    setDirectorEmail: (directorEmail) => {
         const directorEmailValidate = /^[A-Za-z0-9]*@[A-Za-z0-9]([-.]?[A-Za-z0-9])*\.[A-Za-z0-9]{2,3}$/;
         const isMatched = directorEmailValidate.test(directorEmail);
         const directorEmailErrorMessage = isMatched ? '' : '이메일 형식이 아닙니다.';
