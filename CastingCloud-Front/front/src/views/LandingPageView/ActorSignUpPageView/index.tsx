@@ -16,6 +16,7 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
     const { setActorEmailValidate, setActorNickNameValidate, setActorPasswordValidate, setActorPasswordPatternCheck } = useActorStore();
     const { directorEmailValidate, directorNameValidate } = useDirectorStore();
 
+    const [ showPassword, setShowPassword ] = useState<boolean>(false);
     const [showPasswordCheck, setShowPasswordCheck] = useState<boolean>(false);
 
     const emailValidator = /^[A-Za-z0-9]*@[A-Za-z0-9]([-.]?[A-Za-z0-9])*\.[A-Za-z0-9]{2,3}$/;
@@ -27,21 +28,36 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
         setActorEmailPatternCheck(isMatched);
         setActorEmail(value);
     }
-
-    const onActorPasswordCheckChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-        const value = event.target.value;
-        const isMatched = actorPassword === value;
-        setActorPasswordValidate(isMatched);
-        setActorPassword(value);
-    }
-
-    const onEmailValidateChenkChangeHandler = (response: AxiosResponse<any, any>) => {
+    
+    const onEmailValidatebuttonHandler = (response: AxiosResponse<any, any>) => {
         const { result, message, data } = response.data  as ResponseDto<ValidateEmailResponseDto>;
         if (!result || !data) {
             alert(message);
             return;
         }
         setActorEmailValidate(data.result);
+    }
+
+    const onActorPasswordChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const value = event.target.value;
+        const isMatched = passwordValidator.test(value);
+        setActorPasswordPatternCheck(isMatched);
+        setActorPassword(value);
+    }
+
+    const onActorPasswordCheckChangeHandler = (event: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+        const value = event.target.value;
+        const isMatched = actorPassword === value;
+        setActorPasswordValidate(isMatched);
+        setActorPasswordCheck(value);
+    }
+
+    const actorEmailValidateResponsehandler = (response: AxiosResponse<any, any>) => {
+        const { result, message, data } = response.data as ResponseDto<ValidateEmailResponseDto>;
+        if(!result || !data){
+            alert(message);
+            return;
+        }
     }
 
     return (
@@ -68,14 +84,18 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
                         !actorEmailPatternCheck ? (<div style={{color: 'red'}}>이메일 형식이 맞지 않습니다.</div>) : 
                         actorEmailValidate === null ? (<div style={{color: 'orange'}}>이메일 중복 체크를 해주세요.</div>) :
                         !actorEmailValidate ? (<div style={{color: 'red'}}>사용할 수 없는 이메일 입니다.</div>) : (<div style={{color: 'green'}}>사용 가능한 이메일 입니다.</div>)}
-                        <button type='button' className='email-check-button' onClick={() => onEmailValidateChenkChangeHandler} >이메일 중복 확인</button>
+                        <button type='button' className='email-check-button' onClick={() => actorEmailValidateResponsehandler} >이메일 중복 확인</button>
                     비밀번호
                     <div className='password-box'>
-                        <input type='password' className='password' />
+                        <input type={showPassword ? 'text' : 'password'} className='password' value={actorPassword} onChange={(event) => onActorPasswordChangeHandler(event)}/>
+                        <button type='button' className='password-icon' onClick={() => setShowPassword(!showPassword)}>!</button>
+                        { actorPasswordPatternCheck === false ? (<div style={{color: 'red'}}>{'영대문자 + 영소문자 + 숫자 + 특수문자(!?_)를 포함한 8-20자를 입력해주세요.'}</div>) : (<></>) }
                     </div>
                     비밀번호 확인
                     <div className='password-check-box'>
-                        <input type='password' className='password-check' />
+                        <input type={showPasswordCheck ? 'text' : 'password'} className='password-check' value={actorPasswordCheck} onChange={(event) => onActorPasswordCheckChangeHandler(event)} />
+                        <button type='button' className='password-icon' onClick={() => setShowPasswordCheck(!showPasswordCheck)}>!</button>
+                        { actorPasswordValidate === false ? (<div style={{color: 'red'}}>{'비밀번호가 겹치지 않음'}</div>) : (<></>) }
                     </div>
                     <button type='button' className='signup-button'>회원가입</button>
                 </div>

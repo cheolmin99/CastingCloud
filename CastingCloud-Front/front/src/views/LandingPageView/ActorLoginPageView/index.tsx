@@ -24,7 +24,7 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
     const [cookies, setCookie] = useCookies();
     const [actorEmail, setActorEmail] = useState<string>("");
     const [actorPassword, setActorPassword] = useState<string>("");
-    const [showActorPassword, setShowActorpassword] = useState<boolean>(false);
+    const [showActorPassword, setShowActorPassword] = useState<boolean>(false);
     const [actorLoginError, setActorLoginError] = useState<boolean>(false);
 
     const onActorEmailKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
@@ -89,6 +89,7 @@ export default function ActorLoginView({ setActorLoginView }: Props) {
                             <input className="password" type={showActorPassword ? 'text' : 'password'}
                             onChange={(event) => setActorPassword(event.target.value)}
                             onKeyPress={(event) => onActorPasswordKeyPressHandler(event)} />
+                            <button type='button' className='password-button' onClick={() => setShowActorPassword(!showActorPassword)}>!</button>
                         </div>
                         <div className="button-box">
                             <button className="login-button" type="button" onClick={onActorLoginHandler}>로그인</button>

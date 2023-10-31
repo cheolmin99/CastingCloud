@@ -39,6 +39,15 @@
 }
 
 .password-box {
+    display: flex;
+    margin-bottom: 8px;
+    width: 314px;
+    border: 2px rgb(0, 0, 0);
+    border-radius: 3px;
+}
+
+.password-check-box {
+    display: flex;
     margin-bottom: 8px;
     width: 314px;
     border: 2px rgb(0, 0, 0);
@@ -70,4 +79,9 @@
     border: 2px rgb(0, 0, 0);
     border-radius: 3px;
     cursor: pointer;
+}
+
+.password-icon {
+    width: 17px;
+    height: 17px;
 }
