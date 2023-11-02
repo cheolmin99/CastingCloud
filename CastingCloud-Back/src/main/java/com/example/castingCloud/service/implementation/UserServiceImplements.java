@@ -31,7 +31,14 @@ public class UserServiceImplements implements UserService {
             boolean hasActorEmail = actorRepository.existsByActorEmail(actorEmail);
             boolean hasDirectorEmail = directorRepository.existsByDirectorEmail(directorEmail);
 
-            data = new ValidateEmailResponseDto(hasActorEmail, hasDirectorEmail);
+            boolean isEmailValid = !(hasActorEmail || hasDirectorEmail);
+
+            if (isEmailValid) {
+                data = new ValidateEmailResponseDto(true, true);
+            } else {
+                data = new ValidateEmailResponseDto(false, false);
+            }
+            // data = new ValidateEmailResponseDto(isEmailValid, isEmailValid);
 
         } catch(Exception exception) {
             exception.printStackTrace();
