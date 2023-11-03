@@ -18,7 +18,7 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
     const { setActorEmail, setActorPassword, setActorEmailPatternCheck, setActorPasswordCheck } = useActorStore();
     const { actorEmailValidate, actorPasswordValidate, actorPasswordPatternCheck } = useActorStore();
     const { setActorEmailValidate, setActorPasswordValidate, setActorPasswordPatternCheck } = useActorStore();
-    const { directorEmail, setDirectorEmail, setDirectorEmailValidate } = useDirectorStore();
+    const { directorEmail, setDirectorEmailValidate } = useDirectorStore();
     const { setActorSignUpError } = useActorStore();
 
     const [ showPassword, setShowPassword ] = useState<boolean>(false);
@@ -157,6 +157,7 @@ export default function ActorSignUpView({ setActorSignUpView }: Props) {
                         { actorPasswordValidate === false ? (<div style={{color: 'red'}}>{'비밀번호가 겹치지 않음'}</div>) : (<></>) }
                     </div>
                     <button type='button' className='signup-button' onClick={onSignUpHandler}>회원가입</button>
+                    <div className='back-to-login' onClick={() => setActorSignUpView(true)}>로그인으로 돌아가기</div>
                 </div>
             </div>
         </>

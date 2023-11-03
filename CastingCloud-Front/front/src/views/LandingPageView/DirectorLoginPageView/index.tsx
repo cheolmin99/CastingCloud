@@ -1,4 +1,11 @@
+import { Dispatch, SetStateAction } from "react"
+
+interface Props {
+    setDirectorLoginView : Dispatch<SetStateAction<boolean>>
+}
+
 export default function DirectorLoginView() {
+
     return(
         <>
             <div className="container">

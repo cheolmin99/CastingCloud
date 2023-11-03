@@ -4,7 +4,8 @@ interface Dto {
     directorName: string;
     directorCompany: string;
     directorProfile: string | null;
-    expriedTime: number;
+    
+    expiredTime: number;
     token: string;
 }
 

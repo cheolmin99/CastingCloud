@@ -62,7 +62,7 @@ select {
     justify-content: space-between;
     margin-top: 12px;
     height: 19px;
-    width: 311px;
+    width: 100%;
 }
 
 .actor-sign-in {
@@ -71,4 +71,8 @@ select {
 
 .director-auth {
     cursor: pointer;
+}
+
+.login-view-cont {
+    width: 311px;
 }

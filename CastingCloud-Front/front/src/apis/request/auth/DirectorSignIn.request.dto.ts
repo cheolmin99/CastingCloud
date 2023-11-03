@@ -1,5 +1,5 @@
 interface RequestDto{
-    direcotrEmail: string;
+    directorEmail: string;
     directorPassword: string;
 }
 

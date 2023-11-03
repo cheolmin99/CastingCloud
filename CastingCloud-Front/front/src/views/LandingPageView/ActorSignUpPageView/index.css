@@ -74,6 +74,7 @@
 }
 
 .signup-button {
+    margin-bottom: 10px;
     width: 311px;
     height: 17px;
     border: 2px rgb(0, 0, 0);
@@ -84,4 +85,8 @@
 .password-icon {
     width: 17px;
     height: 17px;
+}
+
+.back-to-login {
+    cursor: pointer;
 }
