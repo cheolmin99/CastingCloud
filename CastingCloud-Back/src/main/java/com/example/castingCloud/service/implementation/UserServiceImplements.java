@@ -7,8 +7,11 @@ import com.example.castingCloud.common.ResponseMessage;
 import com.example.castingCloud.dto.request.user.ValidateEmailDto;
 import com.example.castingCloud.dto.request.user.ValidateNickNameDto;
 import com.example.castingCloud.dto.response.ResponseDto;
+import com.example.castingCloud.dto.response.user.GetUserResponseDto;
 import com.example.castingCloud.dto.response.user.ValidateEmailResponseDto;
 import com.example.castingCloud.dto.response.user.ValidateNickNameResponseDto;
+import com.example.castingCloud.entity.ActorEntity;
+import com.example.castingCloud.entity.DirectorEntity;
 import com.example.castingCloud.repository.ActorRepository;
 import com.example.castingCloud.repository.DirectorRepository;
 import com.example.castingCloud.service.UserService;
@@ -64,4 +67,35 @@ public class UserServiceImplements implements UserService {
         }
         return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
     }
+
+    public ResponseDto<GetUserResponseDto> getUser(String actorEmail, String directorEmail) {
+        GetUserResponseDto data = null;
+
+        try {
+            ActorEntity actorEntity = actorRepository.findByActorEmail(actorEmail);
+            DirectorEntity directorEntity = directorRepository.findByDirectorEmail(directorEmail);
+
+        if(actorEntity == null && directorEntity == null)
+            return ResponseDto.setFailed(ResponseMessage.NOT_EXIST_USER);
+            //directorEntity 에서 값을 못 받아오는중 왜인지 모르겠음
+        
+        data = new GetUserResponseDto();
+        
+        if(actorEntity != null) {
+            data = new GetUserResponseDto(actorEntity);
+            data.setActor(true);
+        }
+        
+        if(directorEntity != null) {
+            data = new GetUserResponseDto(directorEntity);
+            data.setDirector(true);
+        }
+
+        } catch (Exception exception) {
+            exception.printStackTrace();
+            return ResponseDto.setFailed(ResponseMessage.DATABASE_ERROR);
+        }
+        return ResponseDto.setSuccess(ResponseMessage.SUCCESS, data);
+    }
+
 }
