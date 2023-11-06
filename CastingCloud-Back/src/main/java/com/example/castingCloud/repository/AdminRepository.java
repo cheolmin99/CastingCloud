@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.example.castingCloud.entity.AdminEntity;
 
 @Repository
-public interface AdminRepository extends JpaRepository<AdminEntity, String>{
+public interface AdminRepository extends JpaRepository<AdminEntity, Integer>{
     public boolean existsByAdminEmail(String adminEmail);
     
     public boolean existsByAdminName(String adminName);

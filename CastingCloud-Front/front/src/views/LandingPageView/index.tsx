@@ -1,8 +1,7 @@
 import { useState } from "react"
 import './index.css';
-import ActorLoginView from "./ActorLoginPageView";
+import ActorLoginView from "./UserLoginPageView";
 import ActorSignUpView from "./ActorSignUpPageView";
-import DirectorLoginView from "./DirectorLoginPageView";
 
 export default function LandingPageView() {
 

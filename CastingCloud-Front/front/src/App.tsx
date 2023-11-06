@@ -1,9 +1,15 @@
 import './App.css';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import LandingPageView from './views/LandingPageView';
-import ActorSignUpView from './views/LandingPageView/ActorSignUpPageView';
+import { useIActorStore, useIDirectorStore } from './stores/user.store';
+import { useCookies } from 'react-cookie';
 
 function App() {
+
+  const path = useLocation();
+  const { setActorUser } = useIActorStore();
+  const { setDirectorUser } = useIDirectorStore();
+  const [cookies] = useCookies();
 
   return (
     <>

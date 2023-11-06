@@ -12,9 +12,9 @@ import './index.css';
 
 function FirstPage() {
     const navigator = useNavigate();
-    const ActorPasswordRef = useRef<HTMLInputElement | null>(null);
+    const actorPasswordRef = useRef<HTMLInputElement | null>(null);
 
-    const { setUser } = useIActorStore();
+    const { setActorUser } = useIActorStore();
     
     const [cookies, setCookie] = useCookies();
     const [actorEmail, setActorEmail] = useState<string>("");
@@ -24,12 +24,12 @@ function FirstPage() {
 
     const onActorEmailKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
-        if (!ActorPasswordRef.current) return;
-        (ActorPasswordRef as any).current?.lastChild?.firstChild?.focus();
+        if (!actorPasswordRef.current) return;
+        (actorPasswordRef as any).current?.lastChild?.firstChild?.focus();
     }
 
     const onActorPasswordKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if(!event.key || !actorPassword) return;
+        if(event.key !== 'Enter') return;
         onActorLoginHandler();
     }
 
@@ -54,10 +54,8 @@ function FirstPage() {
         const { token, expiredTime, ...user } = data;
         const expires = getExpires(expiredTime);
         setCookie('accessToken', token, { expires, path: '/' /* 메인으로 바꿀것 */});
-        setUser(user);
+        setActorUser(user);
         navigator('/' /* 마찬가지 */);
-        
-        
     }
     
     const actorSignInErrorHandler = (error: any) => {
@@ -71,7 +69,7 @@ function FirstPage() {
                         <input className="email" 
                                 onChange={(event) => setActorEmail(event.target.value)}
                                 onKeyPress={(event) => onActorEmailKeyPressHandler(event)}/>
-                            <div className="option" typeof="option">
+                            {/* <div className="option" typeof="option">
                                 @
                                     <select className="option-box" name="order">
                                         <option value="naver">naver.com</option>
@@ -79,7 +77,7 @@ function FirstPage() {
                                         <option value="kakao">kakao.com</option>
                                         <option value="daum">daum.net</option>
                                     </select>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="password-box">
                             <input className="password" type={showActorPassword ? 'text' : 'password'}
@@ -90,7 +88,7 @@ function FirstPage() {
                         <div className="button-box">
                             <button className="login-button" type="button" onClick={onActorLoginHandler}>로그인</button>
                         </div>
-                        
+                        {actorLoginError && (<div style={{ fontSize: '12px', color: 'red', opacity: '0.7' }}>이메일 주소 또는 비밀번호를 잘못 입력하였습니다.</div>)}
                     </div>
         </>
     )
@@ -99,9 +97,9 @@ function FirstPage() {
 function SecondPage() {
 
     const navigator = useNavigate();
-    const DirectorPasswordRef = useRef<HTMLInputElement | null>(null);
+    const directorPasswordRef = useRef<HTMLInputElement | null>(null);
 
-    const { setUser } = useIDirectorStore();
+    const { setDirectorUser } = useIDirectorStore();
     
     const [cookies, setCookie] = useCookies();
     const [directorEmail, setDirectorEmail] = useState<string>("");
@@ -111,12 +109,12 @@ function SecondPage() {
 
     const onDirectorEmailKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key !== 'Enter') return;
-        if (!DirectorPasswordRef.current) return;
-        (DirectorPasswordRef as any).current?.lastChild?.firstChild?.focus();
+        if (!directorPasswordRef.current) return;
+        (directorPasswordRef as any).current?.lastChild?.firstChild?.focus();
     }
 
     const onDirectorPasswordKeyPressHandler = (event: KeyboardEvent<HTMLInputElement>) => {
-        if(!event.key || !directorPassword) return;
+        if(event.key !== 'Enter') return;
         onDirectorLoginHandler();
     }
 
@@ -141,12 +139,12 @@ function SecondPage() {
         const { token, expiredTime, ...user } = data;
         const expires = getExpires(expiredTime);
         setCookie('accessToken', token, { expires, path: '/' /* 메인으로 바꿀것 */});
-        setUser(user);
+        setDirectorUser(user);
         navigator('/' /* 마찬가지 */);
-        console.log('로그인 성공');
     }
     
     const directorSignInErrorHandler = (error: any) => {
+        alert("로그인 실패");
         console.log(error.message);
     }
 
