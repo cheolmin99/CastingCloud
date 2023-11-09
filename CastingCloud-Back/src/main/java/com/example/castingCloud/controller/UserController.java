@@ -14,24 +14,37 @@ import com.example.castingCloud.common.ApiPattern;
 import com.example.castingCloud.dto.request.user.ValidateEmailDto;
 import com.example.castingCloud.dto.request.user.ValidateNickNameDto;
 import com.example.castingCloud.dto.response.ResponseDto;
-import com.example.castingCloud.dto.response.user.GetUserResponseDto;
+import com.example.castingCloud.dto.response.user.GetActorResponseDto;
+import com.example.castingCloud.dto.response.user.GetDirectorResponseDto;
 import com.example.castingCloud.dto.response.user.ValidateEmailResponseDto;
 import com.example.castingCloud.dto.response.user.ValidateNickNameResponseDto;
 import com.example.castingCloud.service.UserService;
 
 @RestController
 @RequestMapping(ApiPattern.USER)
-public class UserValidateController {
+public class UserController {
     @Autowired
     private UserService userService;
 
     private final String VALIDATE_EMAIL = "/validate/email";
     private final String VALIDATE_NAME = "/validate/name";
-    private final String GET_USER = "/";
+    private final String GET_ACTOR = "/actor";
+    private final String GET_DIRECTOR = "/director";
 
-    @GetMapping(GET_USER)
-    public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String actorEmail, String DirectorEmail) {
-        ResponseDto<GetUserResponseDto> response = userService.getUser(actorEmail, DirectorEmail);
+    // @GetMapping(GET_USER)
+    // public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String actorEmail, String DirectorEmail) {
+    //     ResponseDto<GetUserResponseDto> response = userService.getUser(actorEmail, DirectorEmail);
+    //     return response;
+    // }
+    @GetMapping(GET_ACTOR)
+    public ResponseDto<GetActorResponseDto> getActor(@AuthenticationPrincipal String actorEmail) {
+        ResponseDto<GetActorResponseDto> response = userService.getActor(actorEmail);
+        return response;
+    }
+
+    @GetMapping(GET_DIRECTOR)
+    public ResponseDto<GetDirectorResponseDto> getDirector(@AuthenticationPrincipal String directorEmail) {
+        ResponseDto<GetDirectorResponseDto> response = userService.getDirector(directorEmail);
         return response;
     }
 
