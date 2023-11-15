@@ -15,12 +15,12 @@ public class AdminSignInResponseDto {
 
     private String token;
 
-    private int expriedTime;
+    private int expiredTime;
 
     public AdminSignInResponseDto(AdminEntity AdminEntity, String token) {
         this.adminEmail = AdminEntity.getAdminEmail();
         this.adminName = AdminEntity.getAdminName();
         this.token = token;
-        this.expriedTime = 3600;
+        this.expiredTime = 3600000;
     }
 }

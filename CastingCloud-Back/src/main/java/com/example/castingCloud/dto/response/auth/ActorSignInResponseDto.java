@@ -12,17 +12,17 @@ import lombok.NoArgsConstructor;
 public class ActorSignInResponseDto {
     private String actorEmail;
     private String actorNickName;
-    private String actorPrifile;
+    private String actorProfile;
 
     private String token;
 
-    private int expriedTime;
+    private int expiredTime;
 
     public ActorSignInResponseDto(ActorEntity actorEntity, String token) {
         this.actorEmail = actorEntity.getActorEmail();
         this.actorNickName = actorEntity.getActorNickName();
-        this.actorPrifile = actorEntity.getActorProfile();
+        this.actorProfile = actorEntity.getActorProfile();
         this.token = token;
-        this.expriedTime = 3 * 24 * 60 * 60 * 1000;
+        this.expiredTime = 60 * 60 * 1000;
     }
 }

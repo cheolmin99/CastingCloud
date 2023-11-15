@@ -31,11 +31,6 @@ public class UserController {
     private final String GET_ACTOR = "/actor";
     private final String GET_DIRECTOR = "/director";
 
-    // @GetMapping(GET_USER)
-    // public ResponseDto<GetUserResponseDto> getUser(@AuthenticationPrincipal String actorEmail, String DirectorEmail) {
-    //     ResponseDto<GetUserResponseDto> response = userService.getUser(actorEmail, DirectorEmail);
-    //     return response;
-    // }
     @GetMapping(GET_ACTOR)
     public ResponseDto<GetActorResponseDto> getActor(@AuthenticationPrincipal String actorEmail) {
         ResponseDto<GetActorResponseDto> response = userService.getActor(actorEmail);
