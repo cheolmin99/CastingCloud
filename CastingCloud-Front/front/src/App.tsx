@@ -8,6 +8,7 @@ import { GET_ACTOR_URL, GET_DIRECTOR_URL, authorizationHeader } from './constant
 import ResponseDto from './apis/response';
 import { GetActorResponseDto, GetDirectorResponseDto } from './apis/response/user';
 import { useEffect } from 'react';
+import MainPageView from './views/MainView';
 
 function App() {
 
@@ -70,6 +71,7 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={(<LandingPageView/>)} />
+        <Route path='/main' element={(<MainPageView />)} />
       </Routes>
     </>
   );

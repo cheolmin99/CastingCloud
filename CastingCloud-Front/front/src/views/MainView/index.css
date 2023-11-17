@@ -1,0 +1,8 @@
+.category {
+    display: flex;
+}
+
+.menu {
+    display: flex;
+    width: 50px;
+}

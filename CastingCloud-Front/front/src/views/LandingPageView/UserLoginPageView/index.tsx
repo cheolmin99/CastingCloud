@@ -43,6 +43,7 @@ function FirstPage() {
         axios.post(ACTOR_SIGN_IN_URL, data)
             .then((response) => actorSignInResponseHandler(response))
             .catch((error) => actorSignInErrorHandler(error));
+            console.log(data)
     }
     
     const actorSignInResponseHandler = (response: AxiosResponse<any, any>) => {
@@ -55,29 +56,36 @@ function FirstPage() {
         const expires = getExpires(expiredTime);
         setCookie('accessToken', token, { expires, path: '/' /* 메인으로 바꿀것 */});
         setActorUser(user);
-        navigator('/' /* 마찬가지 */);
+        navigator('/main' /* 마찬가지 */);
     }
     
     const actorSignInErrorHandler = (error: any) => {
+        alert('로그인에 실패하였습니다.');
         console.log(error.message);
     }
+
+    // const [selectedDomain, setSelectedDomain] = useState<string>('naver');
 
     return(
         <>
             <div className="login-box">
                         <div className="login">
-                        <input className="email" 
+                        <input className="email"
+                                value={actorEmail}
                                 onChange={(event) => setActorEmail(event.target.value)}
                                 onKeyPress={(event) => onActorEmailKeyPressHandler(event)}/>
-                            {/* <div className="option" typeof="option">
+                            <div className="option" typeof="option">
                                 @
-                                    <select className="option-box" name="order">
+                                    {/* <select className="option-box"
+                                            name="order"
+                                            value={selectedDomain}
+                                            onChange={(event) => setSelectedDomain(event.target.value)}>
                                         <option value="naver">naver.com</option>
                                         <option value="google">google.com</option>
                                         <option value="kakao">kakao.com</option>
                                         <option value="daum">daum.net</option>
-                                    </select>
-                            </div> */}
+                                    </select> */}
+                            </div>
                         </div>
                         <div className="password-box">
                             <input className="password" type={showActorPassword ? 'text' : 'password'}
@@ -138,13 +146,12 @@ function SecondPage() {
         }
         const { token, expiredTime, ...user } = data;
         const expires = getExpires(expiredTime);
-        setCookie('accessToken', token, { expires, path: '/' /* 메인으로 바꿀것 */});
+        setCookie('accessToken', token, { expires, path: '/'});
         setDirectorUser(user);
-        navigator('/' /* 마찬가지 */);
+        navigator('/main' /* 마찬가지 */);
     }
     
     const directorSignInErrorHandler = (error: any) => {
-        alert("로그인 실패");
         console.log(error.message);
     }
 
@@ -174,7 +181,7 @@ function SecondPage() {
                         <div className="button-box">
                             <button className="login-button" type="button" onClick={onDirectorLoginHandler}>로그인</button>
                         </div>
-                        
+                        {directorLoginError && (<div style={{ fontSize: '12px', color: 'red', opacity: '0.7' }}>이메일 주소 또는 비밀번호를 잘못 입력하였습니다.</div>)}
                     </div>
         </>
     )
