@@ -18,13 +18,14 @@ export default function MainPageView() {
                     <option value={'40대'}>40대</option>
                     <option value={'50대'}>고 연령</option>
                 </select>
-                <select name='연령'>
-                    <option value={'남자'}>남성</option>
-                    <option value={'여자'}>여성</option>
+                <select name='장르'>
+                    <option value={'스릴러'}>스릴러</option>
+                    <option value={'코믹'}>코믹</option>
                 </select>
                 <select name='직군'>
                     <option value={'회사원'}>회사원</option>
                     <option value={'식당직원'}>식당직원</option>
+                    <option value={'범인'}>범인</option>
                 </select>
             </div>
         </>

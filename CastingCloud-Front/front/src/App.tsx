@@ -9,6 +9,7 @@ import ResponseDto from './apis/response';
 import { GetActorResponseDto, GetDirectorResponseDto } from './apis/response/user';
 import { useEffect } from 'react';
 import MainPageView from './views/MainView';
+import UpLoadPageView from './views/UpLoadPageView';
 
 function App() {
 
@@ -72,6 +73,7 @@ function App() {
       <Routes>
         <Route path='/' element={(<LandingPageView/>)} />
         <Route path='/main' element={(<MainPageView />)} />
+        <Route path='/upload' element={(<UpLoadPageView />)} />
       </Routes>
     </>
   );
