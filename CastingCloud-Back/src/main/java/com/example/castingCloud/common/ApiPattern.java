@@ -10,5 +10,7 @@ public class ApiPattern {
     public static final String FILE = "/file";
 
     public static final String MAIN = "/main";
+
+    public static final String VIDEO = "/video";
     
 }
