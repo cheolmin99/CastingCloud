@@ -19,3 +19,7 @@ export const USER_VALIDAtE_NICK_NAME = `${HOST}user/validate/name`;
 
 export const GET_ACTOR_URL = `${HOST}user/actor`;
 export const GET_DIRECTOR_URL = `${HOST}user/director`;
+
+export const FILE_UPLOAD_URL = `${HOST}file/upload`;
+
+export const POST_VIDEO_URL = `${HOST}video/post-video`;

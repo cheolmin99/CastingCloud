@@ -1,6 +1,82 @@
+import { useNavigate } from 'react-router-dom'
 import './index.css'
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useCookies } from 'react-cookie';
+import axios, { AxiosResponse } from 'axios';
+import ResponseDto from 'src/apis/response';
+import { PostVideoResponseDto } from 'src/apis/response/upload';
+import { FILE_UPLOAD_URL, POST_VIDEO_URL, authorizationHeader, multipartHeader } from 'src/constants/api';
+import { PostVideoDto } from 'src/apis/request/upload';
 
 export default function UpLoadPageView() {
+
+    const navigator = useNavigate();
+
+    const videoRef = useRef<HTMLInputElement | null>(null);
+    const [cookies] = useCookies();
+    const [videoUrl, setVideoUrl] = useState<string>('');
+    const [videoCategoryGender, setVideoCagetoryGender] = useState<string>('');
+    const [videoCategoryAge, setVideoCategoryAge] = useState<string>('');
+    const [videoCategoryPosition, setVideoCategoryPosition] = useState<string>('');
+    const [videoCategoryGenre, setVideoCategoryGenre] = useState<string>('');
+
+    const accessToken = cookies.accessToken;
+
+    const postVideoResponseHandler = (response: AxiosResponse<any, any>) => {
+        const { result, message, data } = response.data as ResponseDto<PostVideoResponseDto>
+        if (!result || !data) {
+            alert(message)
+            return;
+        }
+        navigator('/main');
+    }
+
+    const videoUploadResponsehandler = (response: AxiosResponse<any, any>) => {
+        const fileUrl = response.data as string;
+        if(!fileUrl) return;
+        setVideoUrl(fileUrl);
+    }
+
+    const onVideoUploadChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+        if (!event.target.files) return;
+        const data = new FormData();
+        data.append('file', event.target.files[0]);
+
+        axios.post(FILE_UPLOAD_URL, data, multipartHeader())
+            .then((response) => videoUploadResponsehandler(response))
+            .catch((error) => onVideoUploadErrorHandler(error))
+    }
+
+    const onWirteHandler = () => {
+        if(!videoUrl.trim() || !videoCategoryGender.trim || !videoCategoryAge.trim() || !videoCategoryGenre.trim() || !videoCategoryPosition.trim()) {
+            alert('모든 내용을 선택해주세요')
+            return;
+        }
+        postVideo();
+    }
+
+    const postVideo = () => {
+        const data : PostVideoDto = {videoUrl, videoCategoryAge, videoCategoryGender, videoCategoryGenre, videoCategoryPosition};
+        axios.post(POST_VIDEO_URL, data, authorizationHeader(accessToken))
+            .then((response) => postVideoResponseHandler(response))
+            .catch((error) => postVideoErrorHandler(error));
+    }
+
+    const postVideoErrorHandler = (error: any) => {
+        console.log(error.message);
+    }
+
+    const onVideoUploadErrorHandler = (error: any) => {
+        console.log(error.message);
+    }
+
+    useEffect(() => {
+        if(!accessToken){
+            alert('로그인이 필요한 작업입니다.');
+            navigator('/');
+        }
+    },[]);
+
     return(
         <>
             <div className="upload-containor">
@@ -10,7 +86,10 @@ export default function UpLoadPageView() {
                 <div className='upload-box'>
                     <div className='upload-box2'>
                         영상을 넣어주세요
-                        <button className='upload-file-button'>파일첨부</button>
+                        <button className='upload-file-button'>
+                            파일첨부
+                            <input ref={videoRef} type='file' accept='video/*'></input>
+                        </button>
                     </div>
                 </div>
                 <div className='upload-category'>
