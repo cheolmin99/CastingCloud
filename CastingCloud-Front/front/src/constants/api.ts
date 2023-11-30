@@ -22,4 +22,4 @@ export const GET_DIRECTOR_URL = `${HOST}user/director`;
 
 export const FILE_UPLOAD_URL = `${HOST}file/upload`;
 
-export const POST_VIDEO_URL = `${HOST}video/post-video`;
+export const POST_VIDEO_URL = `${HOST}video`;

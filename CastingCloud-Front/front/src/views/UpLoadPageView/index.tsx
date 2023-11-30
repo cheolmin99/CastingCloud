@@ -88,7 +88,7 @@ export default function UpLoadPageView() {
                         영상을 넣어주세요
                         <button className='upload-file-button'>
                             파일첨부
-                            <input ref={videoRef} type='file' accept='video/*'></input>
+                            <input ref={videoRef} type='file' accept='video/*' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
                         </button>
                     </div>
                 </div>
@@ -98,11 +98,11 @@ export default function UpLoadPageView() {
                             카테고리 선택
                         </div>
                     </div>
-                        <select name='성별'>
+                        <select name='성별' onChange={(event) => setVideoCagetoryGender(event.target.value)}>
                             <option value={'남자'}>남성</option>
                             <option value={'여자'}>여성</option>
                         </select>
-                        <select name='나이대'>
+                        <select name='나이대' onChange={(event) => setVideoCategoryAge(event.target.value)}>
                             <option value={'유아'}>저 연령</option>
                             <option value={'10대'}>10대</option>
                             <option value={'20대'}>20대</option>
@@ -110,18 +110,18 @@ export default function UpLoadPageView() {
                             <option value={'40대'}>40대</option>
                             <option value={'50대'}>고 연령</option>
                         </select>
-                        <select name='장르'>
+                        <select name='장르' onChange={(event) => setVideoCategoryGenre(event.target.value)}>
                             <option value={'스릴러'}>스릴러</option>
                             <option value={'코믹'}>코믹</option>
                         </select>
-                        <select name='직군'>
+                        <select name='직군' onChange={(event) => setVideoCategoryPosition(event.target.value)}>
                             <option value={'회사원'}>회사원</option>
                             <option value={'식당직원'}>식당직원</option>
                             <option value={'범인'}>범인</option>
                         </select>
                 </div>
                 <div className='upload-button'>
-                    <button>업로드</button>
+                    <button onClick={onWirteHandler}>업로드</button>
                 </div>
             </div>
         </>
