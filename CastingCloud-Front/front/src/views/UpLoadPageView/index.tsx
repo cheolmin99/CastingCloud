@@ -31,6 +31,11 @@ export default function UpLoadPageView() {
         navigator('/main');
     }
 
+    const onVideoUploadButtonHandler = () => {
+        if (!videoRef.current) return;
+        videoRef.current.click();
+    }
+
     const videoUploadResponsehandler = (response: AxiosResponse<any, any>) => {
         const fileUrl = response.data as string;
         if(!fileUrl) return;
@@ -84,9 +89,12 @@ export default function UpLoadPageView() {
                     영상을 업로드 후 카테고리 4개를 설정해 주세요
                 </div>
                 <div className='upload-box'>
-                    <div className='upload-box2'>
-                        영상을 넣어주세요
-                            <input ref={videoRef} type='file' accept='video/*' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
+                    <div className='upload-box2' >
+                        <video className='upload-video' src={videoUrl} typeof='video/*'></video>
+                            <div className='upload-file-button' onClick={() => onVideoUploadButtonHandler()}>
+                                파일첨부
+                                <input id='uploadInput' ref={videoRef} hidden type='file' accept='video/*' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
+                            </div>
                     </div>
                 </div>
                 <div className='upload-category'>
