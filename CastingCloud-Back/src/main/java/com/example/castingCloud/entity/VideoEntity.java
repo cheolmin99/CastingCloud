@@ -36,7 +36,7 @@ public class VideoEntity {
 
     public VideoEntity(ActorEntity actorEntity, PostUploadDto postUploadDto) {
         Date now = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-mm-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
         this.videoCategoryAge = postUploadDto.getVideoCategoryAge();
         this.videoCategoryGender = postUploadDto.getVideoCategoryGender();

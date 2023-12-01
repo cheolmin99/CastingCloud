@@ -48,7 +48,7 @@ export default function UpLoadPageView() {
     }
 
     const onWirteHandler = () => {
-        if(!videoUrl.trim() || !videoCategoryGender.trim || !videoCategoryAge.trim() || !videoCategoryGenre.trim() || !videoCategoryPosition.trim()) {
+        if(!videoCategoryGender.trim || !videoCategoryAge.trim() || !videoCategoryGenre.trim() || !videoCategoryPosition.trim()) {
             alert('모든 내용을 선택해주세요')
             return;
         }
@@ -86,10 +86,7 @@ export default function UpLoadPageView() {
                 <div className='upload-box'>
                     <div className='upload-box2'>
                         영상을 넣어주세요
-                        <button className='upload-file-button'>
-                            파일첨부
                             <input ref={videoRef} type='file' accept='video/*' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
-                        </button>
                     </div>
                 </div>
                 <div className='upload-category'>
@@ -108,7 +105,7 @@ export default function UpLoadPageView() {
                             <option value={'20대'}>20대</option>
                             <option value={'30대'}>30대</option>
                             <option value={'40대'}>40대</option>
-                            <option value={'50대'}>고 연령</option>
+                            <option value={'고 연령'}>고 연령</option>
                         </select>
                         <select name='장르' onChange={(event) => setVideoCategoryGenre(event.target.value)}>
                             <option value={'스릴러'}>스릴러</option>
