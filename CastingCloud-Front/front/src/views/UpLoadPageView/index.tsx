@@ -89,13 +89,17 @@ export default function UpLoadPageView() {
                     영상을 업로드 후 카테고리 4개를 설정해 주세요
                 </div>
                 <div className='upload-box'>
-                    <div className='upload-box2' >
-                        <video className='upload-video' src={videoUrl} typeof='video/*'></video>
-                            <div className='upload-file-button' onClick={() => onVideoUploadButtonHandler()}>
-                                파일첨부
-                                <input id='uploadInput' ref={videoRef} hidden type='file' accept='video/*' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
-                            </div>
+                    <div className='upload-box2'>
+                        {videoUrl && (
+                            <video key={videoUrl} className='upload-video' controls width={300} height={200}>
+                            <source src={videoUrl} type='video/mp4'></source>
+                            </video>
+                        )}
                     </div>
+                        <div className='upload-file-button' onClick={() => onVideoUploadButtonHandler()}>
+                        파일첨부
+                        <input id='uploadInput' ref={videoRef} hidden type='file' accept='video/mp4' onChange={(event) => onVideoUploadChangeHandler(event)}></input>
+                        </div>
                 </div>
                 <div className='upload-category'>
                     <div className='menu'>

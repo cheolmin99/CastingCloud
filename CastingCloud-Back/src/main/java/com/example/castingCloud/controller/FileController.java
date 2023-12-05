@@ -1,7 +1,16 @@
 package com.example.castingCloud.controller;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,11 +26,9 @@ import com.example.castingCloud.service.FileService;
 @RequestMapping(ApiPattern.FILE)
 public class FileController {
     @Autowired private FileService fileService;
-    
-    private final String UPLOAD = "/upload";
-    private final String GET_FILE = "/{fileName}";
+    private String filePath;
 
-    @PostMapping(UPLOAD)
+    @PostMapping("/upload")
     public String upload(
         @RequestParam("file") MultipartFile file
     ) {
@@ -29,11 +36,20 @@ public class FileController {
         return response;
     }
 
-    @GetMapping(GET_FILE)
-    public Resource getFile(
-        @PathVariable("fileName") String fileName
-    ) {
-        Resource response = fileService.getFile(fileName);
-        return response;
+    @GetMapping(value = "{fileName}")
+public ResponseEntity<Resource> getFile(@PathVariable("fileName") String fileName) {
+    Resource resource = fileService.getFile(fileName);
+
+    try {
+        MediaType mediaType = MediaType.parseMediaType(Files.probeContentType(Path.of(filePath + fileName)));
+
+        return ResponseEntity.ok()
+                .contentType(mediaType)
+                .body(resource);
+    } catch (IOException e) {
+        e.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
     }
+}
+    
 }

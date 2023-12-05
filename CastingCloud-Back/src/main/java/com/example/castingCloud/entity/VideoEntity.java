@@ -13,6 +13,7 @@ import com.example.castingCloud.dto.request.upload.PostUploadDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
